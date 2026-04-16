@@ -6,10 +6,12 @@
   "type": "module",
   "main": "./dist/auth-library.cjs.js",
   "module": "./dist/auth-library.es.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/auth-library.es.js",
-      "require": "./dist/auth-library.cjs.js"
+      "require": "./dist/auth-library.cjs.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [

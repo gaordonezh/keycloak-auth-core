@@ -1,17 +1,19 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
-// import dts from "vite-plugin-dts";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   server: { port: 1000 },
   plugins: [
     react(),
-    // dts({
-    //   entryRoot: "src",
-    //   include: ["src"],
-    //   exclude: ["src/**/*.test.ts", "src/main.tsx", "src/demo"],
-    // }),
+    dts({
+      entryRoot: "src",
+      include: ["src/index.ts"],
+      exclude: ["src/demo", "src/main.tsx"],
+      insertTypesEntry: true,
+      rollupTypes: true,
+    }),
   ],
   build: {
     lib: {
