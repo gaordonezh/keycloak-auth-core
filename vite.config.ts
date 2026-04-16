@@ -6,7 +6,11 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   plugins: [
     react(),
-    dts({ include: ["src", "dist"] }), // Genera tipos automáticamente
+    dts({
+      include: ["src"],
+      outDir: "dist",
+      insertTypesEntry: true,
+    }),
   ],
   server: {
     port: 1000,

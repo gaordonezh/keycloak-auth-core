@@ -1,6 +1,6 @@
 import { createContext, Fragment, useContext, useEffect, useMemo, useState } from "react";
 import Keycloak from "keycloak-js";
-import { AuthenticationContextProps, AuthenticationProviderProps } from "../types";
+import type { AuthenticationContextProps, AuthenticationProviderProps } from "../types";
 
 const Authentication = createContext({} as AuthenticationContextProps);
 
