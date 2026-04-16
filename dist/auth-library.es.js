@@ -1,74 +1,101 @@
-import { Fragment as e, createContext as t, useContext as n, useEffect as r, useMemo as i, useState as a } from "react";
-import o from "keycloak-js";
-import { jsx as s, jsxs as c } from "react/jsx-runtime";
+import { Fragment as e, createContext as t, useContext as n, useEffect as r, useMemo as i, useRef as a, useState as o } from "react";
+import s from "keycloak-js";
+import { jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/components/AuthenticationContext.tsx
-var l = t({}), u = () => n(l), d = (t) => {
-	let { children: n, appName: u, options: d } = t, [f, p] = a(), [m, h] = a(!1), [g, _] = a(!1);
+var u = t({}), d = () => n(u), f = (t) => {
+	let { children: n, appName: d, options: f } = t, [p, m] = o(), [h, g] = o(!1), [_, v] = o(!1), y = a(null);
 	r(() => {
-		v();
+		b();
 	}, []);
-	let v = async () => {
+	let b = async () => {
 		try {
-			h(!0);
-			let e = new o(d);
+			g(!0);
+			let e = new s(f);
 			if (await e.init({ onLoad: "login-required" }), !e.authenticated || !e.tokenParsed) return;
-			if (!y(e.tokenParsed.systems)) {
-				_(!0);
+			if (y.current = e.logout, !x(e.tokenParsed.systems)) {
+				v(!0);
 				return;
 			}
-			p(e);
+			m(e);
 		} catch (e) {
 			console.log(e);
 		} finally {
-			h(!1);
+			g(!1);
 		}
-	}, y = (e) => Array.isArray(e) ? e.includes(u) : !1, b = () => {
-		f?.logout();
-	}, x = () => {
+	}, x = (e) => Array.isArray(e) ? e.includes(d) : !1, S = () => {
+		y.current?.();
+	}, C = () => {
 		globalThis.location.href = "https://www.google.com/";
-	}, S = i(() => ({
-		handleLogout: b,
-		userInfo: f?.tokenParsed
-	}), [f]), C = !m && f?.authenticated && !g;
-	return /* @__PURE__ */ s(l.Provider, {
-		value: S,
-		children: C ? /* @__PURE__ */ c(e, { children: [/* @__PURE__ */ s("code", {
+	}, w = () => {
+		globalThis.location.reload();
+	}, T = i(() => ({
+		handleLogout: S,
+		userInfo: p?.tokenParsed
+	}), [p]), E = !h && p?.authenticated && !_;
+	return /* @__PURE__ */ c(u.Provider, {
+		value: T,
+		children: E ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ c("code", {
 			className: "auth__codeblock",
-			children: `${d.realm} — ${d.clientId}`.toUpperCase()
-		}), n] }) : /* @__PURE__ */ c("main", {
+			children: `${f.realm} — ${f.clientId}`.toUpperCase()
+		}), n] }) : /* @__PURE__ */ l("main", {
 			className: "auth__container",
-			children: [/* @__PURE__ */ s("h1", {
+			children: [/* @__PURE__ */ c("h1", {
 				className: "auth__title",
 				children: "SSO NETAPPPERU SAC"
-			}), m ? /* @__PURE__ */ s("h2", {
-				className: "auth__subtitle",
-				children: "..:: CARGANDO ::.."
-			}) : /* @__PURE__ */ s(e, { children: g ? /* @__PURE__ */ c(e, { children: [/* @__PURE__ */ c("div", { children: [
-				/* @__PURE__ */ s("h3", {
+			}), h ? /* @__PURE__ */ l("svg", {
+				width: 75,
+				height: 75,
+				fill: "#fff",
+				viewBox: "0 0 20 20",
+				xmlns: "http://www.w3.org/2000/svg",
+				children: [/* @__PURE__ */ l("linearGradient", {
+					id: "loaderGradient",
+					children: [/* @__PURE__ */ c("stop", {
+						offset: "0%",
+						stopColor: "currentColor",
+						stopOpacity: "1"
+					}), /* @__PURE__ */ c("stop", {
+						offset: "100%",
+						stopColor: "currentColor",
+						stopOpacity: "0.25"
+					})]
+				}), /* @__PURE__ */ c("circle", {
+					cx: "10",
+					cy: "10",
+					r: "8",
+					id: "circle8932",
+					strokeWidth: "1"
+				})]
+			}) : /* @__PURE__ */ c(e, { children: _ ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ l("div", { children: [
+				/* @__PURE__ */ c("h3", {
 					className: "auth__subtitle",
-					children: "No tienes acceso al sistema"
+					children: "No podemos continuar..."
 				}),
-				/* @__PURE__ */ s("p", { children: "¡IMPORTANTE!" }),
-				/* @__PURE__ */ s("p", { children: "Usted no tiene acceso a este sistema contacte con el administrador para una mejor orientación" })
-			] }), /* @__PURE__ */ c("div", {
+				/* @__PURE__ */ c("p", { children: "Usted no tiene acceso a este sistema" }),
+				/* @__PURE__ */ c("p", { children: "Contacte con el administrador para una mejor orientación" })
+			] }), /* @__PURE__ */ l("div", {
 				className: "auth__actions",
-				children: [/* @__PURE__ */ s("button", {
+				children: [/* @__PURE__ */ c("button", {
 					className: "auth__button",
-					onClick: x,
+					onClick: C,
 					children: "SALIR"
-				}), /* @__PURE__ */ s("button", {
+				}), /* @__PURE__ */ c("button", {
 					className: "auth__button",
-					onClick: b,
+					onClick: S,
 					children: "CERRAR SESIÓN"
 				})]
-			})] }) : /* @__PURE__ */ s("p", {
+			})] }) : /* @__PURE__ */ c(e, { children: p?.authenticated ? /* @__PURE__ */ c("p", {
 				className: "auth__subtitle",
-				children: f?.authenticated ? "AUTENTICADO" : "ES NECESARIO INICIAR SESIÓN"
-			}) })]
+				children: "AUTENTICADO"
+			}) : /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ c("p", { children: "Por favor, espere UN PAR DE MINUTOS y vuelva a cargar" }), /* @__PURE__ */ c("button", {
+				className: "auth__button",
+				onClick: w,
+				children: "VOLVER A CARGAR"
+			})] }) }) })]
 		})
 	});
 };
 //#endregion
-export { d as AuthenticationProvider, u as useAuthentication };
+export { f as AuthenticationProvider, d as useAuthentication };
 
 //# sourceMappingURL=auth-library.es.js.map
