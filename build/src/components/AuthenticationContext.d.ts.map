@@ -1,0 +1,1 @@
+{"version":3,"file":"AuthenticationContext.d.ts","sourceRoot":"","sources":["../../../src/components/AuthenticationContext.tsx"],"names":[],"mappings":"AAEA,OAAO,EAAE,0BAA0B,EAAE,2BAA2B,EAAE,MAAM,UAAU,CAAC;AAInF,eAAO,MAAM,iBAAiB,kCAAmC,CAAC;AAElE,QAAA,MAAM,sBAAsB,GAAI,gCAAgC,2BAA2B,4CAsF1F,CAAC;AAEF,eAAe,sBAAsB,CAAC"}

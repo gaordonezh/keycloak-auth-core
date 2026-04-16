@@ -1,34 +1,12 @@
-import {
-  createContext,
-  Fragment,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type PropsWithChildren,
-} from "react";
-import Keycloak, {
-  type KeycloakConfig,
-  type KeycloakTokenParsed,
-} from "keycloak-js";
+import { createContext, Fragment, useContext, useEffect, useMemo, useState } from "react";
+import Keycloak from "keycloak-js";
+import { AuthenticationContextProps, AuthenticationProviderProps } from "../types";
 
-const appName = "CONTABLE-PRINCIPAL";
-const keycloakOptions: KeycloakConfig = {
-  url: "http://localhost:8081",
-  realm: "contable",
-  clientId: "contable-client-id",
-};
-
-interface ContextProps {
-  handleLogout: VoidFunction;
-  userInfo: KeycloakTokenParsed;
-}
-
-const Authentication = createContext({} as ContextProps);
+const Authentication = createContext({} as AuthenticationContextProps);
 
 export const useAuthentication = () => useContext(Authentication);
 
-const AuthenticationProvider = ({ children }: PropsWithChildren) => {
+const AuthenticationProvider = ({ children, appName, options }: AuthenticationProviderProps) => {
   const [keycloakIntance, setKeycloakIntance] = useState<Keycloak>();
   const [loadingAuthentication, setLoadingAuthentication] = useState(false);
   const [denyApplicationAccess, setDenyApplicationAccess] = useState(false);
@@ -40,7 +18,7 @@ const AuthenticationProvider = ({ children }: PropsWithChildren) => {
   const initAndValidateKeycloak = async () => {
     try {
       setLoadingAuthentication(true);
-      const instance = new Keycloak(keycloakOptions);
+      const instance = new Keycloak(options);
       await instance.init({ onLoad: "login-required" });
       if (!instance.authenticated || !instance.tokenParsed) return;
 
@@ -82,9 +60,7 @@ const AuthenticationProvider = ({ children }: PropsWithChildren) => {
   return (
     <Authentication.Provider value={values}>
       <main>
-        <h3>
-          {`${keycloakOptions.realm} — ${keycloakOptions.clientId}`.toUpperCase()}
-        </h3>
+        <h3>{`${options.realm} — ${options.clientId}`.toUpperCase()}</h3>
 
         {loadingAuthentication ? (
           <h3>CARGANDO...</h3>
@@ -95,15 +71,17 @@ const AuthenticationProvider = ({ children }: PropsWithChildren) => {
                 {denyApplicationAccess ? (
                   <div>
                     <h3>NO TIENES ACCESO AL SISTEMA</h3>
-                    <button className="counter" onClick={handleLogout}>
-                      CERRAR SESIÓN
-                    </button>
-                    <button className="counter" onClick={handleClose}>
-                      SALIR
-                    </button>
+                    <button onClick={handleLogout}>CERRAR SESIÓN</button>
+                    <button onClick={handleClose}>SALIR</button>
                   </div>
                 ) : (
-                  children
+                  <div>
+                    <code>
+                      <pre>{JSON.stringify(values.userInfo, null, 2)}</pre>
+                    </code>
+                    <hr />
+                    {children}
+                  </div>
                 )}
               </Fragment>
             ) : (
