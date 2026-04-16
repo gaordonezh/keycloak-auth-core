@@ -1,4 +1,4 @@
-import { useAuthentication } from "./AuthenticationContext";
+import { useAuthentication } from "../components/AuthenticationContext";
 
 const Home = () => {
   const { handleLogout, userInfo } = useAuthentication();

@@ -4,14 +4,12 @@
   "version": "1.0.0",
   "description": "Librería de autenticación con Keycloak para React",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/auth-library.cjs.js",
+  "module": "./dist/auth-library.es.js",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/auth-library.es.js",
+      "require": "./dist/auth-library.cjs.js"
     }
   },
   "files": [

@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import App from "./App";
+import App from "./demo/App";
 // @ts-expect-error
 import "./assets/styles/main.css";
 

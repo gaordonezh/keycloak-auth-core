@@ -1,6 +1,6 @@
-import Home from "./components/Home";
-import AuthenticationProvider from "./components/AuthenticationContext";
-import type { KeycloakOptionsConfigProps } from "./types";
+import Home from "./Home";
+import AuthenticationProvider from "../components/AuthenticationContext";
+import type { KeycloakOptionsConfigProps } from "../types/global";
 
 const appName = "CONTABLE-PRINCIPAL";
 const keycloakOptions: KeycloakOptionsConfigProps = {
