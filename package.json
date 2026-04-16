@@ -12,7 +12,8 @@
       "import": "./dist/auth-library.es.js",
       "require": "./dist/auth-library.cjs.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./styles.css": "./dist/keycloak-auth-core.css"
   },
   "files": [
     "dist"
