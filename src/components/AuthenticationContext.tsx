@@ -1,12 +1,13 @@
 import { createContext, Fragment, useContext, useEffect, useMemo, useState } from "react";
 import Keycloak from "keycloak-js";
-import type { AuthenticationContextProps, AuthenticationProviderProps } from "../types/global";
+import type { AuthenticationContextProps, AuthenticationProviderProps } from "../types";
 
 const Authentication = createContext({} as AuthenticationContextProps);
 
-export const useAuthentication = () => useContext(Authentication);
+export const useAuthentication = (): AuthenticationContextProps => useContext(Authentication);
 
-const AuthenticationProvider = ({ children, appName, options }: AuthenticationProviderProps) => {
+const AuthenticationProvider = (props: AuthenticationProviderProps) => {
+  const { children, appName, options } = props;
   const [keycloakIntance, setKeycloakIntance] = useState<Keycloak>();
   const [loadingAuthentication, setLoadingAuthentication] = useState(false);
   const [denyApplicationAccess, setDenyApplicationAccess] = useState(false);

@@ -8,6 +8,7 @@
     "jsx": "react-jsx",
     "declaration": true, // Genera archivos .d.ts
     "declarationMap": true,
+    "emitDeclarationOnly": false,
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
-import type { GenericOidcConfig, KeycloakConfig, KeycloakServerConfig, KeycloakTokenParsed } from "keycloak-js";
+import type { PropsWithChildren } from "react";
+import type { GenericOidcConfig, KeycloakServerConfig, KeycloakTokenParsed } from "keycloak-js";
 
 export interface AuthenticationContextProps {
   handleLogout: VoidFunction;

@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     dts({
       entryRoot: "src",
-      include: ["src/index.ts"],
+      // include: ["src/index.ts", "src/types.ts"],
       exclude: ["src/demo", "src/main.tsx"],
       insertTypesEntry: true,
       rollupTypes: true,
