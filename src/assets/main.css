@@ -101,3 +101,16 @@
     border-color: rgba(192, 132, 252, 0.5);
   }
 }
+
+@keyframes spinKeyframes {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#circle8932 {
+  transform-origin: 50% 50%;
+  stroke: url(#loaderGradient);
+  fill: none;
+  animation: spinKeyframes 0.5s infinite linear;
+}
