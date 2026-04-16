@@ -4,7 +4,7 @@ const Home = () => {
   const { handleLogout, userInfo } = useAuthentication();
 
   return (
-    <div className="spacing">
+    <div>
       <h3>HOLA {userInfo.name}</h3>
       <button onClick={handleLogout}>CERRAR SESIÓN</button>
     </div>

@@ -3,6 +3,7 @@ import AuthenticationProvider from "../components/AuthenticationContext";
 import type { KeycloakOptionsConfigProps } from "../types";
 
 const appName = "CONTABLE-PRINCIPAL";
+// const appName = "CONTABLE-COLABORADORES";
 const keycloakOptions: KeycloakOptionsConfigProps = {
   url: "http://localhost:8081",
   realm: "contable",

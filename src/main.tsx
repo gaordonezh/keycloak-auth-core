@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import App from "./demo/App";
 // @ts-expect-error
-import "./assets/styles/main.css";
+import "./assets/main.css";
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("keycloak-auth-core-id")!).render(<App />);

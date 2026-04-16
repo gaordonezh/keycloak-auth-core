@@ -12,10 +12,11 @@ var l = t({}), u = () => n(l), d = (t) => {
 			h(!0);
 			let e = new o(d);
 			if (await e.init({ onLoad: "login-required" }), !e.authenticated || !e.tokenParsed) return;
-			if (p(e), !y(e.tokenParsed.systems)) {
+			if (!y(e.tokenParsed.systems)) {
 				_(!0);
 				return;
 			}
+			p(e);
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -28,24 +29,43 @@ var l = t({}), u = () => n(l), d = (t) => {
 	}, S = i(() => ({
 		handleLogout: b,
 		userInfo: f?.tokenParsed
-	}), [f]);
+	}), [f]), C = !m && f?.authenticated && !g;
 	return /* @__PURE__ */ s(l.Provider, {
 		value: S,
-		children: /* @__PURE__ */ c("main", { children: [/* @__PURE__ */ s("h3", { children: `${d.realm} — ${d.clientId}`.toUpperCase() }), m ? /* @__PURE__ */ s("h3", { children: "CARGANDO..." }) : /* @__PURE__ */ s("div", { children: f?.authenticated ? /* @__PURE__ */ s(e, { children: g ? /* @__PURE__ */ c("div", { children: [
-			/* @__PURE__ */ s("h3", { children: "NO TIENES ACCESO AL SISTEMA" }),
-			/* @__PURE__ */ s("button", {
-				onClick: b,
-				children: "CERRAR SESIÓN"
-			}),
-			/* @__PURE__ */ s("button", {
-				onClick: x,
-				children: "SALIR"
-			})
-		] }) : /* @__PURE__ */ c("div", { children: [
-			/* @__PURE__ */ s("code", { children: /* @__PURE__ */ s("pre", { children: JSON.stringify(S.userInfo, null, 2) }) }),
-			/* @__PURE__ */ s("hr", {}),
-			n
-		] }) }) : /* @__PURE__ */ s("h3", { children: "ES NECESARIO INICIAR SESIÓN" }) })] })
+		children: C ? /* @__PURE__ */ c(e, { children: [/* @__PURE__ */ s("code", {
+			className: "auth__codeblock",
+			children: `${d.realm} — ${d.clientId}`.toUpperCase()
+		}), n] }) : /* @__PURE__ */ c("main", {
+			className: "auth__container",
+			children: [/* @__PURE__ */ s("h1", {
+				className: "auth__title",
+				children: "SSO NETAPPPERU SAC"
+			}), m ? /* @__PURE__ */ s("h2", {
+				className: "auth__subtitle",
+				children: "..:: CARGANDO ::.."
+			}) : /* @__PURE__ */ s(e, { children: g ? /* @__PURE__ */ c(e, { children: [/* @__PURE__ */ c("div", { children: [
+				/* @__PURE__ */ s("h3", {
+					className: "auth__subtitle",
+					children: "No tienes acceso al sistema"
+				}),
+				/* @__PURE__ */ s("p", { children: "¡IMPORTANTE!" }),
+				/* @__PURE__ */ s("p", { children: "Usted no tiene acceso a este sistema contacte con el administrador para una mejor orientación" })
+			] }), /* @__PURE__ */ c("div", {
+				className: "auth__actions",
+				children: [/* @__PURE__ */ s("button", {
+					className: "auth__button",
+					onClick: x,
+					children: "SALIR"
+				}), /* @__PURE__ */ s("button", {
+					className: "auth__button",
+					onClick: b,
+					children: "CERRAR SESIÓN"
+				})]
+			})] }) : /* @__PURE__ */ s("p", {
+				className: "auth__subtitle",
+				children: f?.authenticated ? "AUTENTICADO" : "ES NECESARIO INICIAR SESIÓN"
+			}) })]
+		})
 	});
 };
 //#endregion
