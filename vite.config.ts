@@ -23,9 +23,10 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime", "keycloak-js"],
+      external: ["react", "react-dom", "react/jsx-runtime", "keycloak-js", "axios"],
       output: {
         globals: {
+          axios: "axios",
           react: "React",
           "react-dom": "ReactDOM",
           "keycloak-js": "Keycloak",

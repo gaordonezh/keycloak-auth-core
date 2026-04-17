@@ -1,19 +1,46 @@
-import { createContext, Fragment, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, Fragment, useContext, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Keycloak from "keycloak-js";
 import type { AuthenticationContextProps, AuthenticationProviderProps } from "../types";
+import axios, { type AxiosInstance, type CreateAxiosDefaults } from "axios";
+
+let keycloakIntance: Keycloak | undefined;
+
+const getValidToken = async (): Promise<string> => {
+  if (!keycloakIntance?.token) throw new Error("NEED AUTH");
+
+  try {
+    await keycloakIntance.updateToken();
+    return keycloakIntance.token;
+  } catch (err) {
+    keycloakIntance.login();
+    throw err;
+  }
+};
+
+export const createKeycloakAxiosInstance = (initConfig?: CreateAxiosDefaults<any>): AxiosInstance => {
+  const api = axios.create(initConfig);
+
+  api.interceptors.request.use(async (config) => {
+    const token = await getValidToken();
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+
+  return api;
+};
 
 const Authentication = createContext({} as AuthenticationContextProps);
 
 export const useAuthentication = (): AuthenticationContextProps => useContext(Authentication);
 
 const AuthenticationProvider = (props: AuthenticationProviderProps) => {
-  const { children, appName, options } = props;
-  const [keycloakIntance, setKeycloakIntance] = useState<Keycloak>();
+  const { children, accessName, options } = props;
+
   const [loadingAuthentication, setLoadingAuthentication] = useState(false);
   const [denyApplicationAccess, setDenyApplicationAccess] = useState(false);
   const logoutRef = useRef<null | VoidFunction>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     initAndValidateKeycloak();
   }, []);
 
@@ -21,28 +48,25 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
     try {
       setLoadingAuthentication(true);
       const instance = new Keycloak(options);
-      await instance.init({ onLoad: "login-required" });
+      await instance.init({ onLoad: "login-required", checkLoginIframe: true });
       if (!instance.authenticated || !instance.tokenParsed) return;
+
+      console.log(instance);
 
       logoutRef.current = instance.logout;
 
-      const valid = validateApp(instance.tokenParsed.systems);
-      if (!valid) {
+      const hasAccess = instance.hasResourceRole(accessName);
+      if (!hasAccess) {
         setDenyApplicationAccess(true);
         return;
       }
 
-      setKeycloakIntance(instance);
+      keycloakIntance = instance;
     } catch (error) {
       console.log(error);
     } finally {
       setLoadingAuthentication(false);
     }
-  };
-
-  const validateApp = (systems?: Array<string>): boolean => {
-    if (!Array.isArray(systems)) return false;
-    return systems.includes(appName);
   };
 
   const handleLogout = () => {
@@ -57,11 +81,10 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
     globalThis.location.reload();
   };
 
-  const values = useMemo(
+  const values: AuthenticationContextProps = useMemo(
     () => ({
-      handleLogout,
       userInfo: keycloakIntance?.tokenParsed!,
-      accessToken: keycloakIntance?.token!,
+      handleLogout,
     }),
     [keycloakIntance],
   );
