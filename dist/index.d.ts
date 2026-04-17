@@ -1,3 +1,5 @@
+import { AxiosInstance } from 'axios';
+import { CreateAxiosDefaults } from 'axios';
 import { GenericOidcConfig } from 'keycloak-js';
 import { JSX } from 'react/jsx-runtime';
 import { KeycloakServerConfig } from 'keycloak-js';
@@ -7,15 +9,16 @@ import { PropsWithChildren } from 'react';
 export declare interface AuthenticationContextProps {
     handleLogout: VoidFunction;
     userInfo: KeycloakTokenParsed;
-    accessToken: string;
 }
 
 export declare const AuthenticationProvider: (props: AuthenticationProviderProps) => JSX.Element;
 
 export declare interface AuthenticationProviderProps extends PropsWithChildren {
     options: KeycloakOptionsConfigProps;
-    appName: string;
+    accessName: string;
 }
+
+export declare const createKeycloakAxiosInstance: (initConfig?: CreateAxiosDefaults<any>) => AxiosInstance;
 
 export declare type KeycloakOptionsConfigProps = KeycloakServerConfig & Pick<GenericOidcConfig, "clientId">;
 
