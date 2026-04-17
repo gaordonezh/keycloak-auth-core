@@ -7,6 +7,7 @@ import { PropsWithChildren } from 'react';
 export declare interface AuthenticationContextProps {
     handleLogout: VoidFunction;
     userInfo: KeycloakTokenParsed;
+    accessToken: string;
 }
 
 export declare const AuthenticationProvider: (props: AuthenticationProviderProps) => JSX.Element;

@@ -61,6 +61,7 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
     () => ({
       handleLogout,
       userInfo: keycloakIntance?.tokenParsed!,
+      accessToken: keycloakIntance?.token!,
     }),
     [keycloakIntance],
   );

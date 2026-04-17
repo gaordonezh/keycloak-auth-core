@@ -30,7 +30,8 @@ var u = t({}), d = () => n(u), f = (t) => {
 		globalThis.location.reload();
 	}, T = i(() => ({
 		handleLogout: S,
-		userInfo: p?.tokenParsed
+		userInfo: p?.tokenParsed,
+		accessToken: p?.token
 	}), [p]), E = !h && p?.authenticated && !_;
 	return /* @__PURE__ */ c(u.Provider, {
 		value: T,
