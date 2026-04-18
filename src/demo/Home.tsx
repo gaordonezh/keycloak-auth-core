@@ -5,7 +5,7 @@ const Home = () => {
   const { handleLogout, userInfo } = useAuthentication();
 
   const handleFetch = async () => {
-    const test = await apiClient.get("http://localhost:1001/api/user");
+    const test = await apiClient.get("/user");
     console.log(test.data);
   };
 
