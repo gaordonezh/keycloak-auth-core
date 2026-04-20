@@ -7,8 +7,9 @@ import { KeycloakTokenParsed } from 'keycloak-js';
 import { PropsWithChildren } from 'react';
 
 export declare interface AuthenticationContextProps {
-    handleLogout: VoidFunction;
     userInfo: KeycloakTokenParsed;
+    handleLogout: VoidFunction;
+    handleLogin: VoidFunction;
 }
 
 export declare const AuthenticationProvider: (props: AuthenticationProviderProps) => JSX.Element;
@@ -16,6 +17,7 @@ export declare const AuthenticationProvider: (props: AuthenticationProviderProps
 export declare interface AuthenticationProviderProps extends PropsWithChildren {
     options: KeycloakOptionsConfigProps;
     accessName: string;
+    omitGlobalAuth?: boolean;
 }
 
 export declare const createKeycloakAxiosInstance: (initConfig?: CreateAxiosDefaults<any>) => AxiosInstance;
