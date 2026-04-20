@@ -10,7 +10,7 @@ const keycloakOptions: KeycloakOptionsConfigProps = {
 };
 
 const App = () => (
-  <AuthenticationProvider accessName={accessName} options={keycloakOptions}>
+  <AuthenticationProvider omitGlobalAuth accessName={accessName} options={keycloakOptions}>
     <Home />
   </AuthenticationProvider>
 );

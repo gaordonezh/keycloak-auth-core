@@ -2,8 +2,9 @@ import type { PropsWithChildren } from "react";
 import type { GenericOidcConfig, KeycloakServerConfig, KeycloakTokenParsed } from "keycloak-js";
 
 export interface AuthenticationContextProps {
-  handleLogout: VoidFunction;
   userInfo: KeycloakTokenParsed;
+  handleLogout: VoidFunction;
+  handleLogin: VoidFunction;
 }
 
 export type KeycloakOptionsConfigProps = KeycloakServerConfig & Pick<GenericOidcConfig, "clientId">;
@@ -11,4 +12,5 @@ export type KeycloakOptionsConfigProps = KeycloakServerConfig & Pick<GenericOidc
 export interface AuthenticationProviderProps extends PropsWithChildren {
   options: KeycloakOptionsConfigProps;
   accessName: string;
+  omitGlobalAuth?: boolean;
 }

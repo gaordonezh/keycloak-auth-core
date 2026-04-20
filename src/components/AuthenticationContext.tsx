@@ -1,4 +1,4 @@
-import { createContext, Fragment, useContext, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createContext, Fragment, useContext, useLayoutEffect, useMemo, useState } from "react";
 import Keycloak from "keycloak-js";
 import type { AuthenticationContextProps, AuthenticationProviderProps } from "../types";
 import axios, { type AxiosInstance, type CreateAxiosDefaults } from "axios";
@@ -34,11 +34,10 @@ const Authentication = createContext({} as AuthenticationContextProps);
 export const useAuthentication = (): AuthenticationContextProps => useContext(Authentication);
 
 const AuthenticationProvider = (props: AuthenticationProviderProps) => {
-  const { children, accessName, options } = props;
+  const { children, accessName, options, omitGlobalAuth } = props;
 
   const [loadingAuthentication, setLoadingAuthentication] = useState(false);
   const [denyApplicationAccess, setDenyApplicationAccess] = useState(false);
-  const logoutRef = useRef<null | VoidFunction>(null);
 
   useLayoutEffect(() => {
     initAndValidateKeycloak();
@@ -48,20 +47,17 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
     try {
       setLoadingAuthentication(true);
       const instance = new Keycloak(options);
-      await instance.init({ onLoad: "login-required", checkLoginIframe: true });
+      await instance.init({ onLoad: "check-sso", checkLoginIframe: true });
+
+      keycloakIntance = instance;
+
       if (!instance.authenticated || !instance.tokenParsed) return;
-
-      console.log(instance);
-
-      logoutRef.current = instance.logout;
 
       const hasAccess = instance.hasResourceRole(accessName);
       if (!hasAccess) {
         setDenyApplicationAccess(true);
         return;
       }
-
-      keycloakIntance = instance;
     } catch (error) {
       console.log(error);
     } finally {
@@ -70,7 +66,7 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
   };
 
   const handleLogout = () => {
-    logoutRef.current?.();
+    keycloakIntance?.logout();
   };
 
   const handleClose = () => {
@@ -81,10 +77,15 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
     globalThis.location.reload();
   };
 
+  const handleLogin = () => {
+    keycloakIntance?.login();
+  };
+
   const values: AuthenticationContextProps = useMemo(
     () => ({
       userInfo: keycloakIntance?.tokenParsed!,
       handleLogout,
+      handleLogin,
     }),
     [keycloakIntance],
   );
@@ -93,7 +94,7 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
 
   return (
     <Authentication.Provider value={values}>
-      {canContinue ? (
+      {canContinue || omitGlobalAuth ? (
         <Fragment>
           <code className="auth__codeblock">{`${options.realm} — ${options.clientId}`.toUpperCase()}</code>
           {children}
@@ -138,6 +139,9 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
                       <p>Por favor, espere UN PAR DE MINUTOS y vuelva a cargar</p>
                       <button className="auth__button" onClick={handleReload}>
                         VOLVER A CARGAR
+                      </button>
+                      <button className="auth__button" onClick={handleLogin}>
+                        INICIAR SESIÓN
                       </button>
                     </Fragment>
                   )}
