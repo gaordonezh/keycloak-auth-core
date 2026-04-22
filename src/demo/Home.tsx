@@ -11,15 +11,15 @@ const Home = () => {
 
   return (
     <div>
+      <button className="auth__button" onClick={handleFetch}>
+        GET
+      </button>
       {userInfo ? (
         <>
           <h3>HOLA {userInfo.name}</h3>
 
           <button className="auth__button" onClick={handleLogout}>
             CERRAR SESIÓN
-          </button>
-          <button className="auth__button" onClick={handleFetch}>
-            GET
           </button>
 
           <code className="auth__codeblock">

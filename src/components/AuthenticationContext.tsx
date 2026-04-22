@@ -6,13 +6,16 @@ import axios, { type AxiosInstance, type CreateAxiosDefaults } from "axios";
 let keycloakIntance: Keycloak | undefined;
 
 const getValidToken = async (): Promise<string> => {
-  if (!keycloakIntance?.token) throw new Error("NEED AUTH");
-
   try {
-    await keycloakIntance.updateToken();
-    return keycloakIntance.token;
+    if (keycloakIntance?.token) {
+      await keycloakIntance.updateToken();
+      return keycloakIntance.token;
+    } else {
+      return "";
+    }
   } catch (err) {
-    keycloakIntance.login();
+    console.log("ERROR GETVALIDTOKEN:", err);
+    keycloakIntance?.login();
     throw err;
   }
 };
@@ -22,7 +25,7 @@ export const createKeycloakAxiosInstance = (initConfig?: CreateAxiosDefaults<any
 
   api.interceptors.request.use(async (config) => {
     const token = await getValidToken();
-    config.headers.Authorization = `Bearer ${token}`;
+    if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   });
 
