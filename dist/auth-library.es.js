@@ -4,17 +4,16 @@ import s from "axios";
 import { jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/components/AuthenticationContext.tsx
 var u, d = async () => {
-	if (!u?.token) throw Error("NEED AUTH");
 	try {
-		return await u.updateToken(), u.token;
+		return u?.token ? (await u.updateToken(), u.token) : "";
 	} catch (e) {
-		throw u.login(), e;
+		throw console.log("ERROR GETVALIDTOKEN:", e), u?.login(), e;
 	}
 }, f = (e) => {
 	let t = s.create(e);
 	return t.interceptors.request.use(async (e) => {
 		let t = await d();
-		return e.headers.Authorization = `Bearer ${t}`, e;
+		return t && (e.headers.Authorization = `Bearer ${t}`), e;
 	}), t;
 }, p = t({}), m = () => n(p), h = (t) => {
 	let { children: n, accessName: s, options: d, omitGlobalAuth: f } = t, [m, h] = a(!1), [g, _] = a(!1);
