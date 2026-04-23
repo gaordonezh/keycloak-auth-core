@@ -16,43 +16,43 @@ var u, d = async () => {
 		return t && (e.headers.Authorization = `Bearer ${t}`), e;
 	}), t;
 }, p = t({}), m = () => n(p), h = (t) => {
-	let { children: n, accessName: s, options: d, omitGlobalAuth: f } = t, [m, h] = a(!1), [g, _] = a(!1);
+	let { children: n, accessName: s, options: d, omitGlobalAuth: f, checkLoginIframe: m } = t, [h, g] = a(!1), [_, v] = a(!1);
 	r(() => {
-		v();
+		y();
 	}, []);
-	let v = async () => {
+	let y = async () => {
 		try {
-			h(!0);
+			g(!0);
 			let e = new o(d);
 			if (await e.init({
-				onLoad: "check-sso",
-				checkLoginIframe: !0
+				onLoad: f ? "check-sso" : "login-required",
+				checkLoginIframe: m
 			}), u = e, !e.authenticated || !e.tokenParsed) return;
 			if (!e.hasResourceRole(s)) {
-				_(!0);
+				v(!0);
 				return;
 			}
 		} catch (e) {
 			console.log(e);
 		} finally {
-			h(!1);
+			g(!1);
 		}
-	}, y = () => {
-		u?.logout();
 	}, b = () => {
-		globalThis.location.href = "https://www.google.com/";
+		u?.logout();
 	}, x = () => {
-		globalThis.location.reload();
+		globalThis.location.href = "https://www.google.com/";
 	}, S = () => {
+		globalThis.location.reload();
+	}, C = () => {
 		u?.login();
-	}, C = i(() => ({
+	}, w = i(() => ({
 		userInfo: u?.tokenParsed,
-		handleLogout: y,
-		handleLogin: S
-	}), [u]), w = !m && u?.authenticated && !g;
+		handleLogout: b,
+		handleLogin: C
+	}), [u]), T = !h && u?.authenticated && !_;
 	return /* @__PURE__ */ c(p.Provider, {
-		value: C,
-		children: w || f ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ c("code", {
+		value: w,
+		children: T || f ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ c("code", {
 			className: "auth__codeblock",
 			children: `${d.realm} — ${d.clientId}`.toUpperCase()
 		}), n] }) : /* @__PURE__ */ l("main", {
@@ -60,7 +60,7 @@ var u, d = async () => {
 			children: [/* @__PURE__ */ c("h1", {
 				className: "auth__title",
 				children: "SSO NETAPPPERU SAC"
-			}), m ? /* @__PURE__ */ l("svg", {
+			}), h ? /* @__PURE__ */ l("svg", {
 				width: 75,
 				height: 75,
 				fill: "#fff",
@@ -84,7 +84,7 @@ var u, d = async () => {
 					id: "circle8932",
 					strokeWidth: "1"
 				})]
-			}) : /* @__PURE__ */ c(e, { children: g ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ l("div", { children: [
+			}) : /* @__PURE__ */ c(e, { children: _ ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ l("div", { children: [
 				/* @__PURE__ */ c("h3", {
 					className: "auth__subtitle",
 					children: "No podemos continuar..."
@@ -95,11 +95,11 @@ var u, d = async () => {
 				className: "auth__actions",
 				children: [/* @__PURE__ */ c("button", {
 					className: "auth__button",
-					onClick: b,
+					onClick: x,
 					children: "SALIR"
 				}), /* @__PURE__ */ c("button", {
 					className: "auth__button",
-					onClick: y,
+					onClick: b,
 					children: "CERRAR SESIÓN"
 				})]
 			})] }) : /* @__PURE__ */ c(e, { children: u?.authenticated ? /* @__PURE__ */ c("p", {
@@ -109,12 +109,12 @@ var u, d = async () => {
 				/* @__PURE__ */ c("p", { children: "Por favor, espere UN PAR DE MINUTOS y vuelva a cargar" }),
 				/* @__PURE__ */ c("button", {
 					className: "auth__button",
-					onClick: x,
+					onClick: S,
 					children: "VOLVER A CARGAR"
 				}),
 				/* @__PURE__ */ c("button", {
 					className: "auth__button",
-					onClick: S,
+					onClick: C,
 					children: "INICIAR SESIÓN"
 				})
 			] }) }) })]
