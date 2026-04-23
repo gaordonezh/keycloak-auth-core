@@ -101,13 +101,10 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
   return (
     <Authentication.Provider value={values}>
       {canContinue || omitGlobalAuth ? (
-        <Fragment>
-          <code className="auth__codeblock">{`${options.realm} — ${options.clientId}`.toUpperCase()}</code>
-          {children}
-        </Fragment>
+        children
       ) : (
-        <main className="auth__container">
-          <h1 className="auth__title">SSO NETAPPPERU SAC</h1>
+        <main className="sso__container">
+          <h1 className="sso__title">SSO NETAPPPERU SAC</h1>
 
           {loadingAuthentication ? (
             <svg width={75} height={75} fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -115,23 +112,23 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
                 <stop offset="0%" stopColor="currentColor" stopOpacity="1" />
                 <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
               </linearGradient>
-              <circle cx="10" cy="10" r="8" id="circle8932" strokeWidth="1" />
+              <circle cx="10" cy="10" r="8" id="sso__circle__loader" strokeWidth="1" />
             </svg>
           ) : (
             <Fragment>
               {denyApplicationAccess ? (
                 <Fragment>
                   <div>
-                    <h3 className="auth__subtitle">No podemos continuar...</h3>
+                    <h3 className="sso__subtitle">No podemos continuar...</h3>
                     <p>Usted no tiene acceso a este sistema</p>
                     <p>Contacte con el administrador para una mejor orientación</p>
                   </div>
 
-                  <div className="auth__actions">
-                    <button className="auth__button" onClick={handleClose}>
+                  <div className="sso__actions sso__mt">
+                    <button className="sso__button" onClick={handleClose}>
                       SALIR
                     </button>
-                    <button className="auth__button" onClick={handleLogout}>
+                    <button className="sso__button" onClick={handleLogout}>
                       CERRAR SESIÓN
                     </button>
                   </div>
@@ -139,16 +136,21 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
               ) : (
                 <Fragment>
                   {keycloakIntance?.authenticated ? (
-                    <p className="auth__subtitle">AUTENTICADO</p>
+                    <p className="sso__subtitle">AUTENTICADO</p>
                   ) : (
                     <Fragment>
-                      <p>Por favor, espere UN PAR DE MINUTOS y vuelva a cargar</p>
-                      <button className="auth__button" onClick={handleReload}>
-                        VOLVER A CARGAR
-                      </button>
-                      <button className="auth__button" onClick={handleLogin}>
-                        INICIAR SESIÓN
-                      </button>
+                      <p>
+                        Por favor, espere un <b>par de minutos</b> y vuelva a intentarlo.
+                      </p>
+
+                      <div className="sso__actions sso__mt">
+                        <button className="sso__button" onClick={handleReload}>
+                          VOLVER A CARGAR
+                        </button>
+                        <button className="sso__button" onClick={handleLogin}>
+                          INICIAR SESIÓN
+                        </button>
+                      </div>
                     </Fragment>
                   )}
                 </Fragment>

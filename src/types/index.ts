@@ -12,6 +12,6 @@ export type KeycloakOptionsConfigProps = KeycloakServerConfig & Pick<GenericOidc
 export interface AuthenticationProviderProps extends PropsWithChildren {
   options: KeycloakOptionsConfigProps;
   accessName: string;
-  omitGlobalAuth?: boolean;
-  checkLoginIframe?: boolean;
+  omitGlobalAuth: boolean;
+  checkLoginIframe: boolean;
 }

@@ -11,23 +11,22 @@ const Home = () => {
 
   return (
     <div>
-      <button className="auth__button" onClick={handleFetch}>
-        GET
-      </button>
       {userInfo ? (
         <>
           <h3>HOLA {userInfo.name}</h3>
 
-          <button className="auth__button" onClick={handleLogout}>
+          <button className="sso__button" onClick={handleLogout}>
             CERRAR SESIÓN
           </button>
-
-          <code className="auth__codeblock">
+          <button className="sso__button" onClick={handleFetch}>
+            GET
+          </button>
+          <code className="sso__codeblock">
             <pre>{JSON.stringify(userInfo, null, 2)}</pre>
           </code>
         </>
       ) : (
-        <button className="auth__button" onClick={handleLogin}>
+        <button className="sso__button sso__mt" onClick={handleLogin}>
           INICIAR SESIÓN
         </button>
       )}
