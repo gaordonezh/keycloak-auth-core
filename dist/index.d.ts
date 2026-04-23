@@ -17,8 +17,8 @@ export declare const AuthenticationProvider: (props: AuthenticationProviderProps
 export declare interface AuthenticationProviderProps extends PropsWithChildren {
     options: KeycloakOptionsConfigProps;
     accessName: string;
-    omitGlobalAuth?: boolean;
-    checkLoginIframe?: boolean;
+    omitGlobalAuth: boolean;
+    checkLoginIframe: boolean;
 }
 
 export declare const createKeycloakAxiosInstance: (initConfig?: CreateAxiosDefaults<any>) => AxiosInstance;

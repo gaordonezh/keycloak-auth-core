@@ -52,13 +52,10 @@ var u, d = async () => {
 	}), [u]), T = !h && u?.authenticated && !_;
 	return /* @__PURE__ */ c(p.Provider, {
 		value: w,
-		children: T || f ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ c("code", {
-			className: "auth__codeblock",
-			children: `${d.realm} — ${d.clientId}`.toUpperCase()
-		}), n] }) : /* @__PURE__ */ l("main", {
-			className: "auth__container",
+		children: T || f ? n : /* @__PURE__ */ l("main", {
+			className: "sso__container",
 			children: [/* @__PURE__ */ c("h1", {
-				className: "auth__title",
+				className: "sso__title",
 				children: "SSO NETAPPPERU SAC"
 			}), h ? /* @__PURE__ */ l("svg", {
 				width: 75,
@@ -81,43 +78,46 @@ var u, d = async () => {
 					cx: "10",
 					cy: "10",
 					r: "8",
-					id: "circle8932",
+					id: "sso__circle__loader",
 					strokeWidth: "1"
 				})]
 			}) : /* @__PURE__ */ c(e, { children: _ ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ l("div", { children: [
 				/* @__PURE__ */ c("h3", {
-					className: "auth__subtitle",
+					className: "sso__subtitle",
 					children: "No podemos continuar..."
 				}),
 				/* @__PURE__ */ c("p", { children: "Usted no tiene acceso a este sistema" }),
 				/* @__PURE__ */ c("p", { children: "Contacte con el administrador para una mejor orientación" })
 			] }), /* @__PURE__ */ l("div", {
-				className: "auth__actions",
+				className: "sso__actions sso__mt",
 				children: [/* @__PURE__ */ c("button", {
-					className: "auth__button",
+					className: "sso__button",
 					onClick: x,
 					children: "SALIR"
 				}), /* @__PURE__ */ c("button", {
-					className: "auth__button",
+					className: "sso__button",
 					onClick: b,
 					children: "CERRAR SESIÓN"
 				})]
 			})] }) : /* @__PURE__ */ c(e, { children: u?.authenticated ? /* @__PURE__ */ c("p", {
-				className: "auth__subtitle",
+				className: "sso__subtitle",
 				children: "AUTENTICADO"
-			}) : /* @__PURE__ */ l(e, { children: [
-				/* @__PURE__ */ c("p", { children: "Por favor, espere UN PAR DE MINUTOS y vuelva a cargar" }),
-				/* @__PURE__ */ c("button", {
-					className: "auth__button",
+			}) : /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ l("p", { children: [
+				"Por favor, espere un ",
+				/* @__PURE__ */ c("b", { children: "par de minutos" }),
+				" y vuelva a intentarlo."
+			] }), /* @__PURE__ */ l("div", {
+				className: "sso__actions sso__mt",
+				children: [/* @__PURE__ */ c("button", {
+					className: "sso__button",
 					onClick: S,
 					children: "VOLVER A CARGAR"
-				}),
-				/* @__PURE__ */ c("button", {
-					className: "auth__button",
+				}), /* @__PURE__ */ c("button", {
+					className: "sso__button",
 					onClick: C,
 					children: "INICIAR SESIÓN"
-				})
-			] }) }) })]
+				})]
+			})] }) }) })]
 		})
 	});
 };
