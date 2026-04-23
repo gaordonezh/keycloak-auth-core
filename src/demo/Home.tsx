@@ -26,7 +26,7 @@ const Home = () => {
           </code>
         </>
       ) : (
-        <button className="sso__button sso__mt" onClick={handleLogin}>
+        <button className="sso__button" onClick={handleLogin}>
           INICIAR SESIÓN
         </button>
       )}

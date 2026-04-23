@@ -9,7 +9,7 @@ const keycloakOptions: KeycloakOptionsConfigProps = {
 };
 
 const App = () => (
-  <AuthenticationProvider checkLoginIframe={false} omitGlobalAuth={false} accessName="access-contable-client" options={keycloakOptions}>
+  <AuthenticationProvider checkLoginIframe={false} omitGlobalAuth={true} accessName="access-contable-client" options={keycloakOptions}>
     <Home />
   </AuthenticationProvider>
 );
