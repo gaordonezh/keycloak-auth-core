@@ -2,7 +2,6 @@ import Home from "./Home";
 import AuthenticationProvider from "../components/AuthenticationContext";
 import type { KeycloakOptionsConfigProps } from "../types";
 
-const accessName = "access-contable-client";
 const keycloakOptions: KeycloakOptionsConfigProps = {
   url: "http://localhost:8081",
   realm: "contable",
@@ -10,7 +9,7 @@ const keycloakOptions: KeycloakOptionsConfigProps = {
 };
 
 const App = () => (
-  <AuthenticationProvider omitGlobalAuth accessName={accessName} options={keycloakOptions}>
+  <AuthenticationProvider omitGlobalAuth accessName="access-contable-client" options={keycloakOptions}>
     <Home />
   </AuthenticationProvider>
 );

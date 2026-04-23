@@ -13,4 +13,5 @@ export interface AuthenticationProviderProps extends PropsWithChildren {
   options: KeycloakOptionsConfigProps;
   accessName: string;
   omitGlobalAuth?: boolean;
+  checkLoginIframe?: boolean;
 }

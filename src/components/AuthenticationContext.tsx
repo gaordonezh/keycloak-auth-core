@@ -37,7 +37,7 @@ const Authentication = createContext({} as AuthenticationContextProps);
 export const useAuthentication = (): AuthenticationContextProps => useContext(Authentication);
 
 const AuthenticationProvider = (props: AuthenticationProviderProps) => {
-  const { children, accessName, options, omitGlobalAuth } = props;
+  const { children, accessName, options, omitGlobalAuth, checkLoginIframe } = props;
 
   const [loadingAuthentication, setLoadingAuthentication] = useState(false);
   const [denyApplicationAccess, setDenyApplicationAccess] = useState(false);
@@ -50,7 +50,10 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
     try {
       setLoadingAuthentication(true);
       const instance = new Keycloak(options);
-      await instance.init({ onLoad: "check-sso", checkLoginIframe: true });
+      await instance.init({
+        onLoad: omitGlobalAuth ? "check-sso" : "login-required",
+        checkLoginIframe,
+      });
 
       keycloakIntance = instance;
 
