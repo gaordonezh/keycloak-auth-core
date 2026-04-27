@@ -43,7 +43,8 @@ var u, d = async () => {
 	}, C = () => {
 		u?.login();
 	}, w = i(() => ({
-		userInfo: u?.tokenParsed,
+		loadingAuthentication: h,
+		keycloakUser: u?.tokenParsed,
 		handleLogout: b,
 		handleLogin: C
 	}), [u]), T = !h && u?.authenticated && !_, E = f && !_;
@@ -119,6 +120,6 @@ var u, d = async () => {
 	});
 };
 //#endregion
-export { h as AuthenticationProvider, f as createKeycloakAxiosInstance, m as useAuthentication };
+export { h as KeycloakAuthenticationProvider, f as createKeycloakAxiosInstance, m as useKeycloakAuthentication };
 
 //# sourceMappingURL=auth-library.es.js.map

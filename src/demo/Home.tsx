@@ -1,8 +1,8 @@
-import { useAuthentication } from "../components/AuthenticationContext";
+import { useKeycloakAuthentication } from "../components/AuthenticationContext";
 import { apiClient } from "./clients";
 
 const Home = () => {
-  const { userInfo, handleLogout, handleLogin } = useAuthentication();
+  const { keycloakUser, handleLogout, handleLogin } = useKeycloakAuthentication();
 
   const handleFetch = async () => {
     const test = await apiClient.get("/user");
@@ -11,9 +11,9 @@ const Home = () => {
 
   return (
     <div>
-      {userInfo ? (
+      {keycloakUser ? (
         <>
-          <h3>HOLA {userInfo.name}</h3>
+          <h3>HOLA {keycloakUser.name}</h3>
 
           <button className="sso__button" onClick={handleLogout}>
             CERRAR SESIÓN
@@ -22,7 +22,7 @@ const Home = () => {
             GET
           </button>
           <code className="sso__codeblock">
-            <pre>{JSON.stringify(userInfo, null, 2)}</pre>
+            <pre>{JSON.stringify(keycloakUser, null, 2)}</pre>
           </code>
         </>
       ) : (

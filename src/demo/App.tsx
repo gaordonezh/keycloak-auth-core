@@ -1,5 +1,5 @@
 import Home from "./Home";
-import AuthenticationProvider from "../components/AuthenticationContext";
+import KeycloakAuthenticationProvider from "../components/AuthenticationContext";
 import type { KeycloakOptionsConfigProps } from "../types";
 
 const accessName = "";
@@ -10,9 +10,9 @@ const keycloakOptions: KeycloakOptionsConfigProps = {
 };
 
 const App = () => (
-  <AuthenticationProvider checkLoginIframe={false} omitGlobalAuth={true} accessName={accessName} options={keycloakOptions}>
+  <KeycloakAuthenticationProvider checkLoginIframe={false} omitGlobalAuth={true} accessName={accessName} options={keycloakOptions}>
     <Home />
-  </AuthenticationProvider>
+  </KeycloakAuthenticationProvider>
 );
 
 export default App;

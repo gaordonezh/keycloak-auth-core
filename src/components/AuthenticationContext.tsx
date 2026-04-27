@@ -1,6 +1,6 @@
 import { createContext, Fragment, useContext, useLayoutEffect, useMemo, useState } from "react";
 import Keycloak from "keycloak-js";
-import type { AuthenticationContextProps, AuthenticationProviderProps } from "../types";
+import type { KeycloakAuthenticationContextProps, KeycloakAuthenticationProviderProps } from "../types";
 import axios, { type AxiosInstance, type CreateAxiosDefaults } from "axios";
 
 let keycloakIntance: Keycloak | undefined;
@@ -32,11 +32,11 @@ export const createKeycloakAxiosInstance = (initConfig?: CreateAxiosDefaults<any
   return api;
 };
 
-const Authentication = createContext({} as AuthenticationContextProps);
+const KeycloakAuthentication = createContext({} as KeycloakAuthenticationContextProps);
 
-export const useAuthentication = (): AuthenticationContextProps => useContext(Authentication);
+export const useKeycloakAuthentication = (): KeycloakAuthenticationContextProps => useContext(KeycloakAuthentication);
 
-const AuthenticationProvider = (props: AuthenticationProviderProps) => {
+const KeycloakAuthenticationProvider = (props: KeycloakAuthenticationProviderProps) => {
   const { children, accessName, options, omitGlobalAuth, checkLoginIframe } = props;
 
   const [loadingAuthentication, setLoadingAuthentication] = useState(false);
@@ -84,9 +84,10 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
     keycloakIntance?.login();
   };
 
-  const values: AuthenticationContextProps = useMemo(
+  const values: KeycloakAuthenticationContextProps = useMemo(
     () => ({
-      userInfo: keycloakIntance?.tokenParsed!,
+      loadingAuthentication,
+      keycloakUser: keycloakIntance?.tokenParsed!,
       handleLogout,
       handleLogin,
     }),
@@ -97,7 +98,7 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
   const accessValidation = omitGlobalAuth && !denyApplicationAccess;
 
   return (
-    <Authentication.Provider value={values}>
+    <KeycloakAuthentication.Provider value={values}>
       {instanceValidation || accessValidation ? (
         children
       ) : (
@@ -157,8 +158,8 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
           )}
         </main>
       )}
-    </Authentication.Provider>
+    </KeycloakAuthentication.Provider>
   );
 };
 
-export default AuthenticationProvider;
+export default KeycloakAuthenticationProvider;

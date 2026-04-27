@@ -8,13 +8,13 @@ Colocar el nombre y la libreria apuntando al repositorio y al tag que se quiere 
 
 ```js
 "dependencies": {
-  "keycloak-auth-core": "github:gaordonezh/keycloak-auth-core#v1.1.0"
+  "keycloak-auth-core": "github:gaordonezh/keycloak-auth-core#v1.0.0"
 },
 ```
 
 Expone:
 
-- AuthenticationProvider: Contexto global para inicializar la config.
+- KeycloakAuthenticationProvider: Contexto global para inicializar la config.
 - createKeycloakAxiosInstance: Función para crear una instancia de axios con la el token y refresh token incrustado.
-- useAuthentication: Donde se almacena la info del usuario, login y logout.
+- useKeycloakAuthentication: Donde se almacena la info del usuario, login y logout.
 - Estilos globales del autorizador
