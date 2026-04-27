@@ -28,10 +28,7 @@ var u, d = async () => {
 				onLoad: f ? "check-sso" : "login-required",
 				checkLoginIframe: m
 			}), u = e, !e.authenticated || !e.tokenParsed) return;
-			if (!e.hasResourceRole(s)) {
-				v(!0);
-				return;
-			}
+			e.hasResourceRole(s) || v(!0);
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -49,10 +46,10 @@ var u, d = async () => {
 		userInfo: u?.tokenParsed,
 		handleLogout: b,
 		handleLogin: C
-	}), [u]), T = !h && u?.authenticated && !_;
+	}), [u]), T = !h && u?.authenticated && !_, E = f && !_;
 	return /* @__PURE__ */ c(p.Provider, {
 		value: w,
-		children: T || f ? n : /* @__PURE__ */ l("main", {
+		children: T || E ? n : /* @__PURE__ */ l("main", {
 			className: "sso__container",
 			children: [/* @__PURE__ */ c("h1", {
 				className: "sso__title",

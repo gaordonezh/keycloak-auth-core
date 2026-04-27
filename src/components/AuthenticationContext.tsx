@@ -60,10 +60,7 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
       if (!instance.authenticated || !instance.tokenParsed) return;
 
       const hasAccess = instance.hasResourceRole(accessName);
-      if (!hasAccess) {
-        setDenyApplicationAccess(true);
-        return;
-      }
+      if (!hasAccess) setDenyApplicationAccess(true);
     } catch (error) {
       console.log(error);
     } finally {
@@ -96,11 +93,12 @@ const AuthenticationProvider = (props: AuthenticationProviderProps) => {
     [keycloakIntance],
   );
 
-  const canContinue = !loadingAuthentication && keycloakIntance?.authenticated && !denyApplicationAccess;
+  const instanceValidation = !loadingAuthentication && keycloakIntance?.authenticated && !denyApplicationAccess;
+  const accessValidation = omitGlobalAuth && !denyApplicationAccess;
 
   return (
     <Authentication.Provider value={values}>
-      {canContinue || omitGlobalAuth ? (
+      {instanceValidation || accessValidation ? (
         children
       ) : (
         <main className="sso__container">
