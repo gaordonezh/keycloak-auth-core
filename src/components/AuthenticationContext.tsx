@@ -117,8 +117,8 @@ const KeycloakAuthenticationProvider = (props: KeycloakAuthenticationProviderPro
                 <Fragment>
                   <div>
                     <h3 className="sso__subtitle">No podemos continuar...</h3>
-                    <p>Usted no tiene acceso a este sistema</p>
-                    <p>Contacte con el administrador para una mejor orientación</p>
+                    <p className="sso__m-0">Usted no tiene acceso a este sistema</p>
+                    <p className="sso__m-0">Contacte con el administrador para una mejor orientación</p>
                   </div>
 
                   <div className="sso__actions sso__mt">

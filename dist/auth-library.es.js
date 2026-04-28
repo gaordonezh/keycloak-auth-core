@@ -8,7 +8,7 @@ var u = ({ removeContainer: e, appname: t, onLogin: n }) => /* @__PURE__ */ l("d
 	children: [/* @__PURE__ */ l("div", {
 		className: "sso__alert",
 		children: [/* @__PURE__ */ c("p", {
-			className: "sso__alert--icon",
+			className: "sso__alert--icon sso__m-0",
 			children: /* @__PURE__ */ c("svg", {
 				focusable: "false",
 				"aria-hidden": "true",
@@ -18,12 +18,18 @@ var u = ({ removeContainer: e, appname: t, onLogin: n }) => /* @__PURE__ */ l("d
 				width: 32,
 				children: /* @__PURE__ */ c("path", { d: "M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z" })
 			})
-		}), /* @__PURE__ */ l("p", { children: [/* @__PURE__ */ c("b", { children: "¡IMPORTANTE!" }), " La contraseña es la misma que el usuario solo para la primera vez que ingrese con el SSO, posteriormente este te pedirá cambiarlo."] })]
+		}), /* @__PURE__ */ l("p", {
+			className: "sso__m-0",
+			children: [/* @__PURE__ */ c("b", { children: "¡IMPORTANTE!" }), " La contraseña es la misma que el usuario solo para la primera vez que ingrese con el SSO, posteriormente este te pedirá cambiarlo."]
+		})]
 	}), /* @__PURE__ */ l("div", {
 		className: "ssoauth__container",
 		children: [
 			/* @__PURE__ */ c("h3", { children: t }),
-			/* @__PURE__ */ c("p", { children: "Continua con el SSO NAPCONTABLE e ingrese sus credenciales para continuar..." }),
+			/* @__PURE__ */ c("p", {
+				className: "sso__m-0",
+				children: "Continua con el SSO NAPCONTABLE e ingrese sus credenciales para continuar..."
+			}),
 			/* @__PURE__ */ c("button", {
 				className: "sso__button ssoauth__spacing sso__button--full",
 				onClick: n,
@@ -110,8 +116,14 @@ var u = ({ removeContainer: e, appname: t, onLogin: n }) => /* @__PURE__ */ l("d
 					className: "sso__subtitle",
 					children: "No podemos continuar..."
 				}),
-				/* @__PURE__ */ c("p", { children: "Usted no tiene acceso a este sistema" }),
-				/* @__PURE__ */ c("p", { children: "Contacte con el administrador para una mejor orientación" })
+				/* @__PURE__ */ c("p", {
+					className: "sso__m-0",
+					children: "Usted no tiene acceso a este sistema"
+				}),
+				/* @__PURE__ */ c("p", {
+					className: "sso__m-0",
+					children: "Contacte con el administrador para una mejor orientación"
+				})
 			] }), /* @__PURE__ */ l("div", {
 				className: "sso__actions sso__mt",
 				children: [/* @__PURE__ */ c("button", {
