@@ -24,6 +24,14 @@ export declare interface KeycloakAuthenticationProviderProps extends PropsWithCh
     checkLoginIframe: boolean;
 }
 
+export declare const KeycloakLogin: ({ removeContainer, appname, onLogin }: KeycloakLoginProps) => JSX.Element;
+
+export declare interface KeycloakLoginProps {
+    appname: string;
+    onLogin: VoidFunction;
+    removeContainer?: boolean;
+}
+
 export declare type KeycloakOptionsConfigProps = KeycloakServerConfig & Pick<GenericOidcConfig, "clientId">;
 
 export declare const useKeycloakAuthentication: () => KeycloakAuthenticationContextProps;

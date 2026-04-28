@@ -1,7 +1,7 @@
 {
   "name": "keycloak-auth-core",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Librería de autenticación y autorización con Keycloak para React",
   "type": "module",
   "main": "./dist/auth-library.cjs.js",

@@ -2,60 +2,86 @@ import { Fragment as e, createContext as t, useContext as n, useLayoutEffect as 
 import o from "keycloak-js";
 import s from "axios";
 import { jsx as c, jsxs as l } from "react/jsx-runtime";
-//#region src/components/AuthenticationContext.tsx
-var u, d = async () => {
+//#region src/components/KeycloakLogin.tsx
+var u = ({ removeContainer: e, appname: t, onLogin: n }) => /* @__PURE__ */ l("div", {
+	className: e ? "" : "sso__container",
+	children: [/* @__PURE__ */ l("div", {
+		className: "sso__alert",
+		children: [/* @__PURE__ */ c("p", {
+			className: "sso__alert--icon",
+			children: /* @__PURE__ */ c("svg", {
+				focusable: "false",
+				"aria-hidden": "true",
+				viewBox: "0 0 24 24",
+				"data-testid": "SuccessOutlinedIcon",
+				height: 32,
+				width: 32,
+				children: /* @__PURE__ */ c("path", { d: "M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z" })
+			})
+		}), /* @__PURE__ */ l("p", { children: [/* @__PURE__ */ c("b", { children: "¡IMPORTANTE!" }), " La contraseña es la misma que el usuario solo para la primera vez que ingrese con el SSO, posteriormente este te pedirá cambiarlo."] })]
+	}), /* @__PURE__ */ l("div", {
+		className: "ssoauth__container",
+		children: [
+			/* @__PURE__ */ c("h3", { children: t }),
+			/* @__PURE__ */ c("p", { children: "Continua con el SSO NAPCONTABLE e ingrese sus credenciales para continuar..." }),
+			/* @__PURE__ */ c("button", {
+				className: "sso__button ssoauth__spacing sso__button--full",
+				onClick: n,
+				children: "SSO NAPCONTABLE"
+			})
+		]
+	})]
+}), d, f = async () => {
 	try {
-		return u?.token ? (await u.updateToken(), u.token) : "";
+		return d?.token ? (await d.updateToken(), d.token) : "";
 	} catch (e) {
-		throw console.log("ERROR GETVALIDTOKEN:", e), u?.login(), e;
+		throw console.log("ERROR GETVALIDTOKEN:", e), d?.login(), e;
 	}
-}, f = (e) => {
+}, p = (e) => {
 	let t = s.create(e);
 	return t.interceptors.request.use(async (e) => {
-		let t = await d();
+		let t = await f();
 		return t && (e.headers.Authorization = `Bearer ${t}`), e;
 	}), t;
-}, p = t({}), m = () => n(p), h = (t) => {
-	let { children: n, accessName: s, options: d, omitGlobalAuth: f, checkLoginIframe: m } = t, [h, g] = a(!1), [_, v] = a(!1);
+}, m = t({}), h = () => n(m), g = (t) => {
+	let { children: n, accessName: s, options: f, omitGlobalAuth: p, checkLoginIframe: h } = t, [g, _] = a(!0), [v, y] = a(!1);
 	r(() => {
-		y();
+		b();
 	}, []);
-	let y = async () => {
+	let b = async () => {
 		try {
-			g(!0);
-			let e = new o(d);
+			_(!0);
+			let e = new o(f);
 			if (await e.init({
-				onLoad: f ? "check-sso" : "login-required",
-				checkLoginIframe: m
-			}), u = e, !e.authenticated || !e.tokenParsed) return;
-			e.hasResourceRole(s) || v(!0);
+				onLoad: p ? "check-sso" : "login-required",
+				checkLoginIframe: h
+			}), d = e, !e.authenticated || !e.tokenParsed) return;
+			e.hasResourceRole(s) || y(!0);
 		} catch (e) {
 			console.log(e);
 		} finally {
-			g(!1);
+			_(!1);
 		}
-	}, b = () => {
-		u?.logout();
 	}, x = () => {
-		globalThis.location.href = "https://www.google.com/";
+		d?.logout();
 	}, S = () => {
-		globalThis.location.reload();
+		globalThis.location.href = "https://www.google.com/";
 	}, C = () => {
-		u?.login();
+		d?.login();
 	}, w = i(() => ({
-		loadingAuthentication: h,
-		keycloakUser: u?.tokenParsed,
-		handleLogout: b,
+		loadingAuthentication: g,
+		keycloakUser: d?.tokenParsed,
+		handleLogout: x,
 		handleLogin: C
-	}), [u]), T = !h && u?.authenticated && !_, E = f && !_;
-	return /* @__PURE__ */ c(p.Provider, {
+	}), [d, g]), T = !v && !g, E = d?.authenticated && T, D = p && T;
+	return /* @__PURE__ */ c(m.Provider, {
 		value: w,
-		children: T || E ? n : /* @__PURE__ */ l("main", {
+		children: E || D ? n : /* @__PURE__ */ l("main", {
 			className: "sso__container",
 			children: [/* @__PURE__ */ c("h1", {
 				className: "sso__title",
 				children: "SSO NETAPPPERU SAC"
-			}), h ? /* @__PURE__ */ l("svg", {
+			}), g ? /* @__PURE__ */ l("svg", {
 				width: 75,
 				height: 75,
 				fill: "#fff",
@@ -79,7 +105,7 @@ var u, d = async () => {
 					id: "sso__circle__loader",
 					strokeWidth: "1"
 				})]
-			}) : /* @__PURE__ */ c(e, { children: _ ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ l("div", { children: [
+			}) : /* @__PURE__ */ c(e, { children: v ? /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ l("div", { children: [
 				/* @__PURE__ */ c("h3", {
 					className: "sso__subtitle",
 					children: "No podemos continuar..."
@@ -90,36 +116,25 @@ var u, d = async () => {
 				className: "sso__actions sso__mt",
 				children: [/* @__PURE__ */ c("button", {
 					className: "sso__button",
-					onClick: x,
+					onClick: S,
 					children: "SALIR"
 				}), /* @__PURE__ */ c("button", {
 					className: "sso__button",
-					onClick: b,
+					onClick: x,
 					children: "CERRAR SESIÓN"
 				})]
-			})] }) : /* @__PURE__ */ c(e, { children: u?.authenticated ? /* @__PURE__ */ c("p", {
+			})] }) : /* @__PURE__ */ c(e, { children: d?.authenticated ? /* @__PURE__ */ c("p", {
 				className: "sso__subtitle",
 				children: "AUTENTICADO"
-			}) : /* @__PURE__ */ l(e, { children: [/* @__PURE__ */ l("p", { children: [
-				"Por favor, espere un ",
-				/* @__PURE__ */ c("b", { children: "par de minutos" }),
-				" y vuelva a intentarlo."
-			] }), /* @__PURE__ */ l("div", {
-				className: "sso__actions sso__mt",
-				children: [/* @__PURE__ */ c("button", {
-					className: "sso__button",
-					onClick: S,
-					children: "VOLVER A CARGAR"
-				}), /* @__PURE__ */ c("button", {
-					className: "sso__button",
-					onClick: C,
-					children: "INICIAR SESIÓN"
-				})]
-			})] }) }) })]
+			}) : /* @__PURE__ */ c(u, {
+				removeContainer: !0,
+				appname: "SOMEONE APP",
+				onLogin: () => console.log("app")
+			}) }) })]
 		})
 	});
 };
 //#endregion
-export { h as KeycloakAuthenticationProvider, f as createKeycloakAxiosInstance, m as useKeycloakAuthentication };
+export { g as KeycloakAuthenticationProvider, u as KeycloakLogin, p as createKeycloakAxiosInstance, h as useKeycloakAuthentication };
 
 //# sourceMappingURL=auth-library.es.js.map

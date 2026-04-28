@@ -16,5 +16,6 @@ Expone:
 
 - KeycloakAuthenticationProvider: Contexto global para inicializar la config.
 - createKeycloakAxiosInstance: Función para crear una instancia de axios con la el token y refresh token incrustado.
+- KeycloakLogin: Componente para hacer login.
 - useKeycloakAuthentication: Donde se almacena la info del usuario, login y logout.
 - Estilos globales del autorizador
