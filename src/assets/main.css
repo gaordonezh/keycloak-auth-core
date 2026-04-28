@@ -12,6 +12,7 @@
 }
 
 .sso__container {
+  position: relative;
   font: 18px/145% var(--sans);
   color-scheme: light dark;
   color: var(--text);
@@ -137,3 +138,49 @@
   fill: none;
   animation: spinKeyframes 0.5s infinite linear;
 }
+
+/* LOGIN PART ----- start */
+
+.sso__alert {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  background-color: #ffc107;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: flex-start;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+.sso__alert p {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+}
+.sso__alert--icon {
+  width: 32px;
+  height: 32px;
+}
+
+.ssoauth__container {
+  max-width: 450px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px -5px rgba(255, 255, 255, 0.1);
+  padding: 24px;
+}
+.ssoauth__container h3 {
+  color: rgba(255, 255, 255, 0.87);
+}
+.ssoauth__container p {
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 100%;
+  font-weight: 300;
+  font-size: 18px;
+  margin-top: 12px;
+  margin-bottom: 40px;
+}
+
+/* LOGIN PART ----- end */

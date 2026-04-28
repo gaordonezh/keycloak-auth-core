@@ -2,6 +2,7 @@ import { createContext, Fragment, useContext, useLayoutEffect, useMemo, useState
 import Keycloak from "keycloak-js";
 import type { KeycloakAuthenticationContextProps, KeycloakAuthenticationProviderProps } from "../types";
 import axios, { type AxiosInstance, type CreateAxiosDefaults } from "axios";
+import KeycloakLogin from "./KeycloakLogin";
 
 let keycloakIntance: Keycloak | undefined;
 
@@ -39,7 +40,7 @@ export const useKeycloakAuthentication = (): KeycloakAuthenticationContextProps 
 const KeycloakAuthenticationProvider = (props: KeycloakAuthenticationProviderProps) => {
   const { children, accessName, options, omitGlobalAuth, checkLoginIframe } = props;
 
-  const [loadingAuthentication, setLoadingAuthentication] = useState(false);
+  const [loadingAuthentication, setLoadingAuthentication] = useState(true);
   const [denyApplicationAccess, setDenyApplicationAccess] = useState(false);
 
   useLayoutEffect(() => {
@@ -76,10 +77,6 @@ const KeycloakAuthenticationProvider = (props: KeycloakAuthenticationProviderPro
     globalThis.location.href = "https://www.google.com/";
   };
 
-  const handleReload = () => {
-    globalThis.location.reload();
-  };
-
   const handleLogin = () => {
     keycloakIntance?.login();
   };
@@ -91,11 +88,12 @@ const KeycloakAuthenticationProvider = (props: KeycloakAuthenticationProviderPro
       handleLogout,
       handleLogin,
     }),
-    [keycloakIntance],
+    [keycloakIntance, loadingAuthentication],
   );
 
-  const instanceValidation = !loadingAuthentication && keycloakIntance?.authenticated && !denyApplicationAccess;
-  const accessValidation = omitGlobalAuth && !denyApplicationAccess;
+  const stateValidations = !denyApplicationAccess && !loadingAuthentication;
+  const instanceValidation = keycloakIntance?.authenticated && stateValidations;
+  const accessValidation = omitGlobalAuth && stateValidations;
 
   return (
     <KeycloakAuthentication.Provider value={values}>
@@ -137,20 +135,7 @@ const KeycloakAuthenticationProvider = (props: KeycloakAuthenticationProviderPro
                   {keycloakIntance?.authenticated ? (
                     <p className="sso__subtitle">AUTENTICADO</p>
                   ) : (
-                    <Fragment>
-                      <p>
-                        Por favor, espere un <b>par de minutos</b> y vuelva a intentarlo.
-                      </p>
-
-                      <div className="sso__actions sso__mt">
-                        <button className="sso__button" onClick={handleReload}>
-                          VOLVER A CARGAR
-                        </button>
-                        <button className="sso__button" onClick={handleLogin}>
-                          INICIAR SESIÓN
-                        </button>
-                      </div>
-                    </Fragment>
+                    <KeycloakLogin removeContainer appname="SOMEONE APP" onLogin={() => console.log("app")} />
                   )}
                 </Fragment>
               )}

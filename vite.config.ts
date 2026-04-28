@@ -4,12 +4,11 @@ import { resolve } from "node:path";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
-  server: { port: 1000 },
+  server: { port: 6001 },
   plugins: [
     react(),
     dts({
       entryRoot: "src",
-      // include: ["src/index.ts", "src/types.ts"],
       exclude: ["src/demo", "src/main.tsx"],
       insertTypesEntry: true,
       rollupTypes: true,

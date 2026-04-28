@@ -1,4 +1,5 @@
 import { useKeycloakAuthentication } from "../components/AuthenticationContext";
+import KeycloakLogin from "../components/KeycloakLogin";
 import { apiClient } from "./clients";
 
 const Home = () => {
@@ -26,9 +27,7 @@ const Home = () => {
           </code>
         </>
       ) : (
-        <button className="sso__button" onClick={handleLogin}>
-          INICIAR SESIÓN
-        </button>
+        <KeycloakLogin appname="TEST APP" onLogin={handleLogin} />
       )}
     </div>
   );

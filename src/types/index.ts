@@ -16,3 +16,9 @@ export interface KeycloakAuthenticationProviderProps extends PropsWithChildren {
   omitGlobalAuth: boolean;
   checkLoginIframe: boolean;
 }
+
+export interface KeycloakLoginProps {
+  appname: string;
+  onLogin: VoidFunction;
+  removeContainer?: boolean;
+}

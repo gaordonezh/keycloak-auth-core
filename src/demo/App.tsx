@@ -2,15 +2,15 @@ import Home from "./Home";
 import KeycloakAuthenticationProvider from "../components/AuthenticationContext";
 import type { KeycloakOptionsConfigProps } from "../types";
 
-const accessName = "";
+const accessName = 't'
 const keycloakOptions: KeycloakOptionsConfigProps = {
-  url: "https://sso.napcontable.com",
-  realm: "",
-  clientId: "",
-};
+  url: '',
+  realm: '',
+  clientId: '',
+}
 
 const App = () => (
-  <KeycloakAuthenticationProvider checkLoginIframe={false} omitGlobalAuth={true} accessName={accessName} options={keycloakOptions}>
+  <KeycloakAuthenticationProvider checkLoginIframe={false} omitGlobalAuth accessName={accessName} options={keycloakOptions}>
     <Home />
   </KeycloakAuthenticationProvider>
 );
