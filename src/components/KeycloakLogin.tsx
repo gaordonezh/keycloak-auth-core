@@ -16,7 +16,7 @@ const KeycloakLogin = ({ removeContainer, appname, onLogin }: KeycloakLoginProps
 
     <div className="ssoauth__container">
       <h3>{appname}</h3>
-      <p className="sso__m-0">Continua con el SSO NAPCONTABLE e ingrese sus credenciales para continuar...</p>
+      <p>Continua con el SSO NAPCONTABLE e ingrese sus credenciales para continuar...</p>
       <button className="sso__button ssoauth__spacing sso__button--full" onClick={onLogin}>
         SSO NAPCONTABLE
       </button>

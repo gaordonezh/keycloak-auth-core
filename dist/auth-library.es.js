@@ -26,10 +26,7 @@ var u = ({ removeContainer: e, appname: t, onLogin: n }) => /* @__PURE__ */ l("d
 		className: "ssoauth__container",
 		children: [
 			/* @__PURE__ */ c("h3", { children: t }),
-			/* @__PURE__ */ c("p", {
-				className: "sso__m-0",
-				children: "Continua con el SSO NAPCONTABLE e ingrese sus credenciales para continuar..."
-			}),
+			/* @__PURE__ */ c("p", { children: "Continua con el SSO NAPCONTABLE e ingrese sus credenciales para continuar..." }),
 			/* @__PURE__ */ c("button", {
 				className: "sso__button ssoauth__spacing sso__button--full",
 				onClick: n,
