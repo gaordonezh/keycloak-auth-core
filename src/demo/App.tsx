@@ -2,11 +2,11 @@ import Home from "./Home";
 import KeycloakAuthenticationProvider from "../components/AuthenticationContext";
 import type { KeycloakOptionsConfigProps } from "../types";
 
-const accessName = "access-sso-auth-front";
+const accessName = "";
 const keycloakOptions: KeycloakOptionsConfigProps = {
-  url: "https://sso.napcontable.com",
-  realm: "contable",
-  clientId: "sso-auth-front-clientid",
+  url: "",
+  realm: "",
+  clientId: "",
 };
 
 const App = () => (
