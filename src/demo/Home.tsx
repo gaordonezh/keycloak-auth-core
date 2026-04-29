@@ -27,7 +27,12 @@ const Home = () => {
           </code>
         </>
       ) : (
-        <KeycloakLogin appname="TEST APP" onLogin={handleLogin} />
+        <KeycloakLogin
+          removeContainer={false}
+          expireDate={new Date(2026, 3, 30, 23, 59, 59)}
+          appname="TEST APP"
+          onLogin={handleLogin}
+        />
       )}
     </div>
   );

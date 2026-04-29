@@ -135,7 +135,12 @@ const KeycloakAuthenticationProvider = (props: KeycloakAuthenticationProviderPro
                   {keycloakIntance?.authenticated ? (
                     <p className="sso__subtitle">AUTENTICADO</p>
                   ) : (
-                    <KeycloakLogin removeContainer appname="SOMEONE APP" onLogin={() => console.log("app")} />
+                    <KeycloakLogin
+                      removeContainer
+                      expireDate={new Date(2026, 3, 30, 23, 59, 59)}
+                      appname="TEST APP"
+                      onLogin={handleLogin}
+                    />
                   )}
                 </Fragment>
               )}

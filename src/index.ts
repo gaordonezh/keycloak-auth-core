@@ -9,5 +9,6 @@ export type {
   KeycloakAuthenticationContextProps,
   KeycloakAuthenticationProviderProps,
   KeycloakOptionsConfigProps,
+  KeycloakSSOUserProps,
   KeycloakLoginProps,
 } from "./types";
